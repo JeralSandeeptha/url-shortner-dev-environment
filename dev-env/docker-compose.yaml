@@ -90,6 +90,24 @@ services:
       - /app/node_modules
     depends_on:
       - mongodb
+  redirection_service:
+    build:
+      context: ../../url-shortner-rediection-service
+      dockerfile: Dockerfile.dev
+    container_name: redirection_service_container
+    ports:
+      - "5003:5003"
+    environment:
+      - PORT=5003
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://jeral:1234@mongodb:27017/url_redirect_db?authSource=admin
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ../../url-shortner-rediection-service:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
   frontend:
     build:
       context: ../../url-shortner-frontend

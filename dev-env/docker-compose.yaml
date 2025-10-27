@@ -12,6 +12,22 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: "jeral"
       MONGO_INITDB_ROOT_PASSWORD: "1234"
+  mongo_express:
+    container_name: mongo_express_container
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "jeral"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "1234"
+      ME_CONFIG_MONGODB_SERVER: "mongodb"
+      ME_CONFIG_MONGODB_AUTH_DATABASE: "admin"
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+    volumes:
+      - ../docker/ms/mongo-express:/config
+    depends_on:
+      - mongodb
   postgres_users_db:
     container_name: postgres_users_db_container
     image: postgres:13.22-alpine3.21

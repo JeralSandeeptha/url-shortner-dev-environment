@@ -108,6 +108,28 @@ services:
       - /app/node_modules
     depends_on:
       - mongodb
+  gateway_service:
+    build:
+      context: ../../url-shortner-gateway-service
+      dockerfile: Dockerfile.dev
+    container_name: gateway_service_container
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
+      - USER_API_URL=http://localhost:5001
+      - URL_GENERATE_API_URL=http://localhost:5002
+      - URL_REDIRECT_API_URL=http://localhost:5003
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ../../url-shortner-gateway-service:/app
+      - /app/node_modules
+    depends_on:
+      - user_service
+      - url_generate_service
+      - redirection_service
   frontend:
     build:
       context: ../../url-shortner-frontend

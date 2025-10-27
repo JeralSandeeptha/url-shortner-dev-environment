@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  mongodb:
+    container_name: mongodb_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ../docker/db/mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "jeral"
+      MONGO_INITDB_ROOT_PASSWORD: "1234"
   postgres_users_db:
     container_name: postgres_users_db_container
     image: postgres:13.22-alpine3.21

@@ -12,7 +12,7 @@ services:
       - POSTGRES_USER=jeral
       - POSTGRES_PASSWORD=1234
     volumes:
-      - ./docker/db/postgres_users_db:/var/lib/postgresql/data
+      - ../docker/db/postgres_users_db:/var/lib/postgresql/data
   pgAdmin:
     container_name: pgadmin_container
     image: elestio/pgadmin:latest

@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  postgres_users_db:
+    container_name: postgres_users_db_container
+    image: postgres:13.22-alpine3.21
+    restart: always
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_DB=users_db
+      - POSTGRES_USER=jeral
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - ./docker/db/postgres_users_db:/var/lib/postgresql/data
   frontend:
     build:
       context: ../../url-shortner-frontend

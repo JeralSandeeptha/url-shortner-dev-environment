@@ -72,6 +72,24 @@ services:
       - /app/node_modules
     depends_on:
       - postgres_users_db
+  url_generate_service:
+    build:
+      context: ../../url-shortner-url-generate-service
+      dockerfile: Dockerfile.dev
+    container_name: url_generate_service_container
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - NODE_ENV=development
+      - DATABASE_URL=mongodb://jeral:1234@mongodb:27017/url_generate_db?authSource=admin
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ../../url-shortner-url-generate-service:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
   frontend:
     build:
       context: ../../url-shortner-frontend

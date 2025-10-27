@@ -13,6 +13,20 @@ services:
       - POSTGRES_PASSWORD=1234
     volumes:
       - ./docker/db/postgres_users_db:/var/lib/postgresql/data
+  pgAdmin:
+    container_name: pgadmin_container
+    image: elestio/pgadmin:latest
+    restart: always
+    ports:
+      - "5433:5433"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=jeral@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=1234
+      - PGADMIN_LISTEN_PORT=5433
+    volumes:
+      - ../docker/ms/pgAdmin:/var/lib/pgadmin
+    depends_on:
+      - postgres_users_db
   frontend:
     build:
       context: ../../url-shortner-frontend

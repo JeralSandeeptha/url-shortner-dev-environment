@@ -94,6 +94,10 @@ services:
     environment:
       - PORT=5001
       - NODE_ENV=development
+      - KEYCLOACK_SERVER_URL=http://keycloak:8080
+      - KEYCLOACK_CLIENT_ID=react-client
+      - KEYCLOACK_CLIENT_SECRET=ydEtQl4tc7pdbSZ3xm9tyJoi0aHtH2dW
+      - KEYCLOACK_GRANT_TYPE=client_credentials
       - DATABASE_URL=postgresql://jeral:1234@postgres_users_db:5432/users_db
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
@@ -148,9 +152,9 @@ services:
     environment:
       - PORT=5000
       - NODE_ENV=development
-      - USER_API_URL=http://localhost:5001
-      - URL_GENERATE_API_URL=http://localhost:5002
-      - URL_REDIRECT_API_URL=http://localhost:5003
+      - USER_API_URL=http://user_service:5001
+      - URL_GENERATE_API_URL=http://url_generate_service:5002
+      - URL_REDIRECT_API_URL=http://redirection_service:5003
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     volumes:
@@ -173,7 +177,7 @@ services:
       - /app/node_modules
     environment:
       - MODE=development
-      - VITE_API_URL=https://api.example.com
+      - VITE_API_URL=http://localhost:5000
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       - FAST_REFRESH=true

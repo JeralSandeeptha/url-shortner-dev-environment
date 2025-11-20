@@ -41,6 +41,8 @@ services:
       ME_CONFIG_MONGODB_SERVER: "mongodb"
       ME_CONFIG_MONGODB_AUTH_DATABASE: "admin"
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: yohan #For browser
+      ME_CONFIG_BASICAUTH_PASSWORD: 1234 #For browser
     volumes:
       - ../docker/ms/mongo-express:/config
     depends_on:
@@ -133,7 +135,7 @@ services:
     environment:
       - PORT=5003
       - NODE_ENV=development
-      - DATABASE_URL=mongodb://jeral:1234@mongodb:27017/url_redirect_db?authSource=admin
+      - DATABASE_URL=mongodb://jeral:1234@mongodb:27017/url_generate_db?authSource=admin
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     volumes:

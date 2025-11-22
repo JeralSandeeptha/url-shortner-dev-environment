@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Managed Services and Service
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     container_name: keycloak
@@ -86,6 +87,7 @@ services:
     depends_on:
       - postgres_users_db
       - postgres_keycloak_db
+  # Services
   user_service:
     build:
       context: ../../url-shortner-users-service
@@ -97,6 +99,7 @@ services:
       - PORT=5001
       - NODE_ENV=development
       - KEYCLOACK_SERVER_URL=http://keycloak:8080
+      - KEYCLOACK_GATEWAY_SERVER_URL=http://gateway_service:5000/gateway/auth
       - KEYCLOACK_CLIENT_ID=url-shortner-user-service
       - KEYCLOACK_CLIENT_SECRET=JHGNtyNJ34fdYWHcPbTQ3BWrRo9RK8Og
       - DATABASE_URL=postgresql://jeral:1234@postgres_users_db:5432/users_db
@@ -159,6 +162,7 @@ services:
       - USER_API_URL=http://user_service:5001
       - URL_GENERATE_API_URL=http://url_generate_service:5002
       - URL_REDIRECT_API_URL=http://redirection_service:5003
+      - KEYCLOAK_API_URL=http://keycloak:8080
       - BASE_URL=http://localhost:5173
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
@@ -169,6 +173,7 @@ services:
       - user_service
       - url_generate_service
       - redirection_service
+      - keycloak
   frontend:
     build:
       context: ../../url-shortner-frontend

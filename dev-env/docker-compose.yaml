@@ -100,6 +100,7 @@ services:
       - KEYCLOACK_CLIENT_ID=url-shortner-user-service
       - KEYCLOACK_CLIENT_SECRET=JHGNtyNJ34fdYWHcPbTQ3BWrRo9RK8Og
       - DATABASE_URL=postgresql://jeral:1234@postgres_users_db:5432/users_db
+      - BASE_URL=http://localhost:5173
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     volumes:
@@ -118,6 +119,7 @@ services:
       - PORT=5002
       - NODE_ENV=development
       - DATABASE_URL=mongodb://jeral:1234@mongodb:27017/url_generate_db?authSource=admin
+      - BASE_URL=http://localhost:5173
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     volumes:
@@ -136,6 +138,7 @@ services:
       - PORT=5003
       - NODE_ENV=development
       - DATABASE_URL=mongodb://jeral:1234@mongodb:27017/url_generate_db?authSource=admin
+      - BASE_URL=http://localhost:5173
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     volumes:
@@ -156,6 +159,7 @@ services:
       - USER_API_URL=http://user_service:5001
       - URL_GENERATE_API_URL=http://url_generate_service:5002
       - URL_REDIRECT_API_URL=http://redirection_service:5003
+      - BASE_URL=http://localhost:5173
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     volumes:
@@ -177,7 +181,7 @@ services:
       - ../../url-shortner-frontend:/app
       - /app/node_modules
     environment:
-      - MODE=development
+      - NODE_ENV=development
       - VITE_API_URL=http://localhost:5000
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true

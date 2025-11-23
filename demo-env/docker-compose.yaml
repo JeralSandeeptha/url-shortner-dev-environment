@@ -105,7 +105,7 @@ services:
     environment:
       - PORT=5001
       - NODE_ENV=production
-      - KEYCLOACK_SERVER_URL=http://keycloak:8070
+      - KEYCLOACK_SERVER_URL=http://keycloak:8080
       - KEYCLOACK_GATEWAY_SERVER_URL=http://gateway_service:5000/gateway/auth
       - KEYCLOACK_CLIENT_ID=url-shortner-user-service
       - KEYCLOACK_CLIENT_SECRET=PeoQEM1Dj16coUpGBp1Xhx7Puykf6ELU
@@ -148,7 +148,7 @@ services:
       - USER_API_URL=http://user_service:5001
       - URL_GENERATE_API_URL=http://url_generate_service:5002
       - URL_REDIRECT_API_URL=http://redirection_service:5003
-      - KEYCLOAK_API_URL=http://keycloak:8070
+      - KEYCLOAK_API_URL=http://keycloak:8080
       - BASE_URL=http://localhost
     depends_on:
       - user_service
@@ -156,7 +156,7 @@ services:
       - redirection_service
       - keycloak
   frontend:
-    image: jeralsandeeptha/url-shortner-frontend-service-main:3cdf2a60644bca4fd8c61cdb2b1e8bd28447b8d2
+    image: jeralsandeeptha/url-shortner-frontend-service-dev:e8d6fc591df74fd889137c90f36818dd00448b98
     container_name: frontend_url_shortner
     restart: always
     ports:

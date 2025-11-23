@@ -163,4 +163,5 @@ services:
       - '80:80'
     environment:
       - NODE_ENV=production
+      - MODE=production
       - VITE_API_URL=http://localhost:5000

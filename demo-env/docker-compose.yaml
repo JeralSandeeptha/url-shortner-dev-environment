@@ -165,3 +165,4 @@ services:
       - NODE_ENV=production
       - MODE=production
       - VITE_API_URL=http://localhost:5000
+      - DOMAIN=undefined # not use sub domains, This is for kubernates

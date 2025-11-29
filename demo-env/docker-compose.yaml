@@ -111,6 +111,7 @@ services:
       - KEYCLOACK_CLIENT_SECRET=PeoQEM1Dj16coUpGBp1Xhx7Puykf6ELU
       - DATABASE_URL=postgresql://jeral:1234@postgres_users_db:5432/users_db
       - BASE_URL=http://localhost
+      - DOMAIN=undefined # not use sub domains, This is for kubernates
     depends_on:
       - postgres_users_db
   url_generate_service:

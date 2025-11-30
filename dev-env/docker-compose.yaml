@@ -4,7 +4,7 @@ services:
   # Managed Services and Service
   keycloak:
     image: quay.io/keycloak/keycloak:latest
-    container_name: keycloak
+    container_name: keycloak_containerr
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres_keycloak_db:5432/keycloak
@@ -20,7 +20,7 @@ services:
     ports:
       - "8080:8080"
   mongodb:
-    container_name: mongodb_container
+    container_name: mongodb_containerr
     image: mongo:latest
     restart: always
     ports:
@@ -31,7 +31,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: "jeral"
       MONGO_INITDB_ROOT_PASSWORD: "1234"
   mongo_express:
-    container_name: mongo_express_container
+    container_name: mongo_express_containerr
     image: mongo-express:latest
     restart: always
     ports:
@@ -49,7 +49,7 @@ services:
     depends_on:
       - mongodb
   postgres_keycloak_db:
-    container_name: postgres_keycloak_db_container
+    container_name: postgres_keycloak_db_containerr
     image: postgres:13.22-alpine3.21
     restart: always
     ports:
@@ -61,7 +61,7 @@ services:
     volumes:
       - ../docker/db/postgres_keycloak_db:/var/lib/postgresql/data
   postgres_users_db:
-    container_name: postgres_users_db_container
+    container_name: postgres_users_db_containerr
     image: postgres:13.22-alpine3.21
     restart: always
     ports:
@@ -73,7 +73,7 @@ services:
     volumes:
       - ../docker/db/postgres_users_db:/var/lib/postgresql/data
   pgAdmin:
-    container_name: pgadmin_container
+    container_name: pgadmin_containerr
     image: elestio/pgadmin:latest
     restart: always
     ports:
@@ -92,7 +92,7 @@ services:
     build:
       context: ../../url-shortner-users-service
       dockerfile: Dockerfile.dev
-    container_name: user_service_container
+    container_name: user_service_containerr
     ports:
       - "5001:5001"
     environment:
@@ -115,7 +115,7 @@ services:
     build:
       context: ../../url-shortner-url-generate-service
       dockerfile: Dockerfile.dev
-    container_name: url_generate_service_container
+    container_name: url_generate_service_containerr
     ports:
       - "5002:5002"
     environment:
@@ -134,7 +134,7 @@ services:
     build:
       context: ../../url-shortner-rediection-service
       dockerfile: Dockerfile.dev
-    container_name: redirection_service_container
+    container_name: redirection_service_containerr
     ports:
       - "5003:5003"
     environment:
@@ -153,7 +153,7 @@ services:
     build:
       context: ../../url-shortner-gateway-service
       dockerfile: Dockerfile.dev
-    container_name: gateway_service_container
+    container_name: gateway_service_containerr
     ports:
       - "5000:5000"
     environment:
@@ -174,11 +174,12 @@ services:
       - url_generate_service
       - redirection_service
       - keycloak
+      - frontend
   frontend:
     build:
       context: ../../url-shortner-frontend
       dockerfile: Dockerfile.dev
-    container_name: frontend_url_shortner
+    container_name: frontend_url_shortnerr
     restart: always
     ports:
       - '5173:5173'
@@ -191,6 +192,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       - FAST_REFRESH=true
+      - VITE_DOMAIN=http://localhost:5173
     stdin_open: true
     tty: true
   

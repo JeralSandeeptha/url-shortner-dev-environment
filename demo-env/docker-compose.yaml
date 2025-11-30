@@ -156,6 +156,7 @@ services:
       - url_generate_service
       - redirection_service
       - keycloak
+      - frontend
   frontend:
     image: jeralsandeeptha/url-shortner-frontend-service-main:bf2317351e6cae5ddd58eb2bdd77114bbba1abe6
     container_name: frontend_url_shortner
@@ -166,4 +167,4 @@ services:
       - NODE_ENV=production
       - MODE=production
       - VITE_API_URL=http://localhost:5000
-      - DOMAIN=undefined # not use sub domains, This is for kubernates
+      - VITE_DOMAIN=http://localhost # not use sub domains, This is for kubernates
